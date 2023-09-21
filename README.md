@@ -2,14 +2,19 @@
 title: Dataviews APIs
 description: Manage CJA dataviews through APIs
 ---
-
 # Dataviews
 
-{DESCRIPTION}
+* GET multiple dataviews: Retrieves a list of dataviews for a specified company
+* GET a single dataview: Retrieves information for a single dataview
+* POST validate a dataview: Checks a dataview for correct fields before creating
+* POST create a dataview: Creates a dataview for a specified company
+* PUT copy a dataview: Copies a dataview
+* PUT modify a dataview: Modifies or updates a dataveiw with new data
+* DELETE delete a dataview: Removes a dataview
 
 ## GET /data/dataviews {Retrieval of Data Views for a Company}
 
-Use this endpoint to retrieve the data views associated with a company.
+Use this endpoint to retrieve multiple data views associated with a company.
 
 `GET https://cja.adobe.io/data/dataviews`
 
