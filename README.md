@@ -50,7 +50,6 @@ curl -L 'https://cja.adobe.io/data/dataviews?expansion=name%2Cowner%2Corganizati
             "organization": "{IMS_ORG_ID}",
             "systemUserOwned": false,
             "id": "dv_1de9ac146e674b139222222"
-"
         },
         {
             "name": "Example 2 Data View",
