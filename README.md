@@ -40,7 +40,7 @@ curl -L 'https://cja.adobe.io/data/dataviews?expansion=name%2Cowner%2Corganizati
     "content": [
         {
             "name": "Example 1 Data View",
-            "description": "",
+            "description": "Campaign list 1",
             "owner": {
                 "imsUserId": "{IMS_USER_ID}",
                 "ownerId": "{OWNER_ID}",
@@ -49,11 +49,12 @@ curl -L 'https://cja.adobe.io/data/dataviews?expansion=name%2Cowner%2Corganizati
             },
             "organization": "{IMS_ORG_ID}",
             "systemUserOwned": false,
-            "id": "{DATA_VIEW_ID}"
+            "id": "dv_1de9ac146e674b139222222"
+"
         },
         {
             "name": "Example 2 Data View",
-            "description": "",
+            "description": "Campaign list 2",
             "owner": {
                 "imsUserId": "{IMS_USER_ID}",
                 "ownerId": "{OWNER_ID}",
@@ -62,11 +63,11 @@ curl -L 'https://cja.adobe.io/data/dataviews?expansion=name%2Cowner%2Corganizati
             },
             "organization": "{IMS_ORG_ID}",
             "systemUserOwned": false,
-            "id": "{DATA_VIEW_ID}"
+            "id": "dv_2de9ac146e674b139222223"
         },
         {
             "name": "Example 3 Data View",
-            "description": "",
+            "description": "Campaign list 3",
             "owner": {
                 "imsUserId": "{IMS_USER_ID}",
                 "ownerId": "{OWNER_ID}",
@@ -75,7 +76,7 @@ curl -L 'https://cja.adobe.io/data/dataviews?expansion=name%2Cowner%2Corganizati
             },
             "organization": "{IMS_ORG_ID}",
             "systemUserOwned": false,
-            "id": "{DATA_VIEW_ID}"
+            "id": "dv_3de9ac146e674b139222224"
         }
     ],
     "number": 0,
@@ -91,24 +92,22 @@ curl -L 'https://cja.adobe.io/data/dataviews?expansion=name%2Cowner%2Corganizati
 
 ### Request example details
 
-The example above requests:
+The example above requests the following:
 
-* the data views associated with {IMS_ORG_ID}.
-* the name, owner, organization, and description of the data views to be included in the response.
-* the `limit` of results per page be `3`.
-* the `page` to be shown is the first page which is `0`.
+* The `expansion` parameter values for name, owner, organization, and description of the data views to be included in the response.
+* The `limit` of results per page to be `3`.
+* The first `page` to be shown is `0`.
 
 ### Response example details
 
-The example above responds with:
+The example response above shows the following:
 
-* the page `number` `0` is being displayed.
-* the page displayed is the `firstPage`, which is `true`.
-* the `numberOfElements` per page is `3`.
-* the `totalElements` of the `IMS_ORG_ID` is `1170`.
+* The the first result, `Example 1 Data View` is the data view `name`; `Example name 1` is the `name` of the `owner`; and `Campaign list 1` is `description`. These values are returned as requested expansion parameters.
+* The IDs for the data veiws are `dv_1de9ac146e674b139222222`, `dv_2de9ac146e674b139222223`, and `dv_3de9ac146e674b139222224`.
+* the `"number": 0` refers to the displayed page, or the first page.
+* the `numberOfElements` confirms our request that the results displayed per page is `3`.
+* the `totalElements` of all the dataviews for the specified organization is `1170`.
 * the `totalPages` of data views is `390` when the `numberOfElements` per page is `3`.
-* the `name`, `owner`, `organization`, and `description` of the data views, as asked for in the expansion parameter of the request.
-* the `id` of the data views returned.
 
 ### Request Parameters
 
