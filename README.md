@@ -12,7 +12,7 @@ description: Manage CJA dataviews through APIs
 * PUT modify a dataview: Modifies or updates a dataveiw with new data
 * DELETE a dataview: Removes a dataview
 
-## GET /data/dataviews {Retrieval of Data Views for a Company}
+## GET multiple data views
 
 Use this endpoint to retrieve multiple data views associated with a company.
 
