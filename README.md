@@ -7,7 +7,7 @@ description: Manage CJA dataviews through APIs
 * GET multiple dataviews: Retrieves a list of dataviews for a specified company
 * GET a single dataview: Retrieves information for a single dataview
 * POST validate a dataview: Checks a dataview for correct fields before creating
-* POST create a dataview: Creates a dataview for a specified company
+* POST create a dataview: Creates a dataview with a JSON payload for a specified company
 * PUT copy a dataview: Copies a dataview
 * PUT modify a dataview: Modifies or updates a dataveiw with new data
 * DELETE a dataview: Removes a dataview
