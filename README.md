@@ -176,7 +176,7 @@ The example response above shows the following:
 | `size` | integer | The number of data sets displayed per page |
 | `number` | integer | The page number being displayed. The first page is `0`. |
 
-## POST /data/dataviews {Creation of Data Views}
+## POST create a data view
 
 Use this endpoint to create a data view using a JSON payload.
 
@@ -198,8 +198,14 @@ curl -L 'https://cja.adobe.io/data/dataviews?expansion=name%2Cdescription%2Cpare
 -H 'Content-Type: application/json' \
 --data-raw '{
   "name": "testView",
-  "description": "A Test Data View",
-  "parentDataGroupId": "{PARENT_DATA_GROUP_ID}",
+  "description": "Test Data View",
+  "parentDataGroupId": "dg_xxxxxxx-0cb0-11ea-a9a5-xxxxxxxxxxx"
+
+
+
+
+
+",
   "timezoneDesignator": "US/Mountain",
   "sessionDefinition": [
     {
@@ -213,7 +219,7 @@ curl -L 'https://cja.adobe.io/data/dataviews?expansion=name%2Cdescription%2Cpare
   ],
   "organization": "{IMS_ORG_ID}",
   "externalData": {
-    "externalParentId": "{EXTERNAL_PARENT_ID}"
+    "externalParentId": "xxxxxxx-0cb0-11ea-a9a5-xxxxxxxxxxx"
   }
 }'
 ```
@@ -223,8 +229,8 @@ curl -L 'https://cja.adobe.io/data/dataviews?expansion=name%2Cdescription%2Cpare
 ```JSON
 {
     "name": "testView",
-    "description": "A Test Data View",
-    "parentDataGroupId": "{PARENT_DATA_GROUP_ID}",
+    "description": "Test Data View",
+    "parentDataGroupId": "dg_xxxxxxx-0cb0-11ea-a9a5-xxxxxxxxxxx",
     "currentTimezoneOffset": -6.0,
     "timezoneDesignator": "US/Mountain",
     "organization": "{IMS_ORG_ID}",
