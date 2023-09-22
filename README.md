@@ -432,7 +432,7 @@ The example response above shows the following for data view `dv_150a049f5d02785
 | `people` | string | The name of the people container |
 | `id` | string | The ID of the data view |
 
-## PUT /data/dataviews/{dataViewId} {Modification of a Data View by dataViewId}
+## PUT Modify a data view
 
 Use this endpoint to modify a data view by sending a JSON structure containing the values to be changed.
 
@@ -447,30 +447,22 @@ Click the **Request** tab in the following example to see a cURL request for thi
 #### Request
 
 ```sh
-curl -L -X PUT 'https://cja.adobe.io/data/dataviews/{DATA_VIEW_ID}?expansion=name%2Cdescription%2Cowner%2Cmodified' \
+curl -L -X PUT 'https://cja.adobe.io/data/dataviews/dv_650a049f5d02785bacxxxxxx?expansion=name%2Cdescription%2Cowner%2Cmodified' \
 -H 'x-api-key: {API_KEY}' \
 -H 'x-gw-ims-org-id: {GLOBAL_COMPANY_ID}' \
 -H 'Authorization: Bearer {AUTHORIZATION_TOKEN}'\
 -H 'Content-Type: application/json' \
 --data-raw '{
-  "name": "testView",
-  "description": "A Test Data View",
-  "parentDataGroupId": "{PARENT_DATA_GROUP_ID}",
-  "timezoneDesignator": "US/Mountain",
   "sessionDefinition": [
     {
-      "numPeriods": 15,
+      "numPeriods": 30,
       "granularity": "MINUTE",
       "func": "INACTIVITY",
       "events": [
         "string"
       ]
     }
-  ],
-  "organization": "{IMS_ORG_ID}",
-  "externalData": {
-    "externalParentId": "{EXTERNAL_PARENT_ID}"
-  }
+  ]
 }'
 ```
 
