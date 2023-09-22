@@ -440,6 +440,8 @@ Use this endpoint to modify a data view by sending a JSON structure containing t
 
 ### Request and Response Examples
 
+In the following examples, the `dv_650a049f5d02785bacxxxxxx` data view above is modified so that the `sessionDefinition` is set 30 one minute periods instead of `15`.
+
 Click the **Request** tab in the following example to see a cURL request for this endpoint. Click the **Response** tab to see a successful JSON response for the request.
 
 <CodeBlock slots="heading, code" repeat="2" languages="CURL,JSON"/>
@@ -447,12 +449,12 @@ Click the **Request** tab in the following example to see a cURL request for thi
 #### Request
 
 ```sh
-curl -L -X PUT 'https://cja.adobe.io/data/dataviews/dv_650a049f5d02785bacxxxxxx?expansion=name%2Cdescription%2Cowner%2Cmodified' \
+curl -L -X PUT 'https://cja.adobe.io/data/dataviews/dv_650a049f5d02785bacxxxxxx?expansion=name%2Cmodified' \
 -H 'x-api-key: {API_KEY}' \
 -H 'x-gw-ims-org-id: {GLOBAL_COMPANY_ID}' \
 -H 'Authorization: Bearer {AUTHORIZATION_TOKEN}'\
 -H 'Content-Type: application/json' \
---data-raw '{
+-d '{
   "sessionDefinition": [
     {
       "numPeriods": 30,
@@ -471,16 +473,19 @@ curl -L -X PUT 'https://cja.adobe.io/data/dataviews/dv_650a049f5d02785bacxxxxxx?
 ```JSON
 {
     "name": "testView",
-    "description": "A Test Data View",
-    "owner": {
-        "imsUserId": "{IMS_USER_ID}",
-        "ownerId": "{OWNER_ID}",
-        "name": "null null",
-        "type": "imsUser"
-    },
+    "sessionDefinition": [
+        {
+            "numPeriods": 30,
+            "granularity": "minute",
+            "func": "inactivity",
+            "events": [
+                "string"
+            ]
+        }
+    ],
+    "id": "dv_650a049f5d02785bac9225a7",
     "modifiedDate": "2023-09-19T20:32:20Z",
-    "modifiedBy": "{IMS_USER_ID}",
-    "id": "{DATA_VIEW_ID}"
+    "modifiedBy": "{IMS_USER_ID}"
 }
 ```
 
