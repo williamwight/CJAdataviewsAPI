@@ -491,11 +491,14 @@ curl -L -X PUT 'https://cja.adobe.io/data/dataviews/dv_650a049f5d02785bacxxxxxx?
 
 ### Request example details
 
-The example above requests to modify the `{DATA_VIEW_ID}` using the `--data-raw`.
+The example request above modifies the data view `dv_650a049f5d02785bacxxxxxx` from `15` to `30` minute periods of `inactivity` before ending.
 
 ### Response example details
 
-The example above responds with the updated values of the data view.
+The example response above shows the following:
+
+* The updated `numPeriods` value of `30` in the `sessionDefintion` for the data view.
+* The `name` of the data view and the modification details, as specified in the request.
 
 ### Request Parameters
 
