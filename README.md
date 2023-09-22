@@ -387,7 +387,7 @@ The example response above shows the following for data view `dv_150a049f5d02785
 * `Example Data View 1` as the `name`.
 * `Example Data View` as the `description`.
 * `Example name 1` as the `name` for the `owner`.
-*`dg_c590c1e0-0cb0-11ea-a9a5-19370exxxxxx` as the `parentDataGroupId`.
+* `dg_c590c1e0-0cb0-11ea-a9a5-19370exxxxxx` as the `parentDataGroupId`.
 * `US/Mountain` as the `timezoneDesignator`.
 * `c590c1e0-0cb0-11ea-a9a5-19370exxxxxx` as the`externalData`.
 
