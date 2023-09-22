@@ -440,7 +440,7 @@ Use this endpoint to modify a data view by sending a JSON structure containing t
 
 ### Request and Response Examples
 
-In the following examples, the `dv_650a049f5d02785bacxxxxxx` data view above is modified so that the `sessionDefinition` is set 30 one minute periods instead of `15`.
+In the following examples, the `dv_650a049f5d02785bacxxxxxx` data view above is modified so that the `sessionDefinition` is set to `30` minute periods of `inactivity` instead of `15`.
 
 Click the **Request** tab in the following example to see a cURL request for this endpoint. Click the **Response** tab to see a successful JSON response for the request.
 
