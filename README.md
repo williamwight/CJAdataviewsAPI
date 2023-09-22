@@ -440,7 +440,7 @@ Use this endpoint to modify a data view by sending a JSON structure containing t
 
 ### Request and Response Examples
 
-In the following examples, the `dv_650a049f5d02785bacxxxxxx` data view above is modified so that the `sessionDefinition` is set to `30` minute periods of `inactivity` instead of `15`.
+In the following examples, the `dv_650a049f5d02785bacxxxxxx` data view created above is modified so that the `numPeriods` in `sessionDefinition` is set to `30` instead of `15`.
 
 Click the **Request** tab in the following example to see a cURL request for this endpoint. Click the **Response** tab to see a successful JSON response for the request.
 
@@ -491,7 +491,7 @@ curl -L -X PUT 'https://cja.adobe.io/data/dataviews/dv_650a049f5d02785bacxxxxxx?
 
 ### Request example details
 
-The example request above modifies the data view `dv_650a049f5d02785bacxxxxxx` from `15` to `30` minute periods of `inactivity` before ending.
+The example request above modifies the `numPerioPeriods` in the data view `dv_650a049f5d02785bacxxxxxx` to `30` minute periods of `inactivity` before ending.
 
 ### Response example details
 
