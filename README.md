@@ -241,7 +241,7 @@ curl -L 'https://cja.adobe.io/data/dataviews?expansion=name%2Cdescription%2Cpare
     "externalData": {
         "externalParentId": "{EXTERNAL_PARENT_ID}"
     },
-    "id": "{DATA_VIEW_ID}"
+    "id": "dv_650a049f5d02785bacxxxxxx"
 }
 ```
 
@@ -255,9 +255,10 @@ The example above requests the following:
 
 ### Response example details
 
-The response example above responds the following:
+The response example above shows the following:
 
-* the `id` of the created data view is `{DATA_VIEW_ID}`
+* The `id` of the created data view is `dv_650a049f5d02785bacxxxxxx`.
+* A confirmation of the `sessionDefinition` parameter values, as described in the request details.
 
 ### Request Parameters
 
