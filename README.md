@@ -334,7 +334,7 @@ The response example above shows the following:
 | `people` | string | The name of the people container |
 | `id` | string | The ID of the data view |
 
-## GET /data/dataviews/{dataViewId} {Retrieval of a Data View by dataViewId}
+## GET a single data view
 
 Use this endpoint to retrieve data associated with a specific data view.
 
@@ -349,7 +349,7 @@ Click the **Request** tab in the following example to see a cURL request for thi
 #### Request
 
 ```sh
-curl -L 'https://cja.adobe.io/data/dataviews/{DATA_VIEW_ID}?expansion=name%2Cowner%2Cdescription%2CparentDataGroupId%2CtimezoneDesignator%2CexternalData%2CcontainerNames' \
+curl -L 'https://cja.adobe.io/data/dataviews/dv_150a049f5d02785bacxxxxxx?expansion=name%2Cowner%2Cdescription%2CparentDataGroupId%2CtimezoneDesignator%2CexternalData' \
 -H 'x-api-key: {API_KEY}' \
 -H 'x-gw-ims-org-id: {GLOBAL_COMPANY_ID}' \
 -H 'Authorization: Bearer {AUTHORIZATION_TOKEN}'
@@ -360,29 +360,36 @@ curl -L 'https://cja.adobe.io/data/dataviews/{DATA_VIEW_ID}?expansion=name%2Cown
 ```JSON
 {
     "name": "Example Data View 1",
-    "description": "An example Data View",
+    "description": "Example Data View",
     "owner": {
         "imsUserId": "{IMS_USER_ID}",
         "ownerId": "{OWNER_ID}",
         "name": "Example name 1",
         "type": "imsUser"
     },
-    "parentDataGroupId": "{PARENT_DATA_GROUP_ID}",
+    "parentDataGroupId": "dg_c590c1e0-0cb0-11ea-a9a5-19370exxxxxx",
     "timezoneDesignator": "US/Mountain",
     "externalData": {
-        "externalParentId": "{EXTERNAL_PARENT_ID}"
+        "externalParentId": "c590c1e0-0cb0-11ea-a9a5-19370exxxxxx"
     },
-    "id": "{DATA_VIEW_ID}"
+    "id": "dv_150a049f5d02785bacxxxxxx"
 }
 ```
 
 ### Request example details
 
-The example above requests the `name`. `owner`, `description`, `parentDataGroupId`, `timezoneDesignator`, `externalData`, and `containerNames` of the data view using the `expansion` parameter.
+The example above requests the `expansion` parameter values for `name`, `owner`, `description`, `parentDataGroupId`, `timezoneDesignator`, and `externalData` for data view `dv_150a049f5d02785bacxxxxxx`.
 
 ### Response example details
 
-The example above responds the `name`. `owner`, `description`, `parentDataGroupId`, `timezoneDesignator`, `externalData`, and `containerNames` of the data view.
+The example response above shows the following for data view `dv_150a049f5d02785bacxxxxxx`:
+
+* `Example Data View 1` as the `name`.
+* `Example Data View` as the `description`.
+* `Example name 1` as the `name` for the `owner`.
+*`dg_c590c1e0-0cb0-11ea-a9a5-19370exxxxxx` as the `parentDataGroupId`.
+* `US/Mountain` as the `timezoneDesignator`.
+* `c590c1e0-0cb0-11ea-a9a5-19370exxxxxx` as the`externalData`.
 
 ### Request Parameters
 
