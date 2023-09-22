@@ -199,13 +199,7 @@ curl -L 'https://cja.adobe.io/data/dataviews?expansion=name%2Cdescription%2Cpare
 --data-raw '{
   "name": "testView",
   "description": "Test Data View",
-  "parentDataGroupId": "dg_xxxxxxx-0cb0-11ea-a9a5-xxxxxxxxxxx"
-
-
-
-
-
-",
+  "parentDataGroupId": "dg_xxxxxxx-0cb0-11ea-a9a5-xxxxxxxxxxx",
   "timezoneDesignator": "US/Mountain",
   "sessionDefinition": [
     {
