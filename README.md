@@ -249,9 +249,9 @@ curl -L 'https://cja.adobe.io/data/dataviews?expansion=name%2Cdescription%2Cpare
 
 The example above requests the following:
 
-* the `name` of the data view should be `testView`.
-* the `parentDataGroupId` should be the given `{PARENT_DATA_GROUP_ID}`.
-* `inactivity` be described as 15 minutes.
+* Specifies the `name` of the data view as `testView`.
+* The `parentDataGroupId` is specified as `dg_xxxxxxx-0cb0-11ea-a9a5-xxxxxxxxxxx`.
+* Specifies the `sessionDefinition` to consist of `15` one-minute periods of `inactivity` before ending.
 
 ### Response example details
 
