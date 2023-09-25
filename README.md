@@ -176,6 +176,219 @@ The example response above shows the following:
 | `size` | integer | The number of data sets displayed per page |
 | `number` | integer | The page number being displayed. The first page is `0`. |
 
+## GET a single data view
+
+Use this endpoint to retrieve data associated with a specific data view.
+
+`GET https://cja.adobe.io/data/dataviews/{DATA_VIEW_ID}`
+
+### Request and Response Examples
+
+Click the **Request** tab in the following example to see a cURL request for this endpoint. Click the **Response** tab to see a successful JSON response for the request.
+
+<CodeBlock slots="heading, code" repeat="2" languages="CURL,JSON"/>
+
+#### Request
+
+```sh
+curl -L 'https://cja.adobe.io/data/dataviews/dv_150a049f5d02785bacxxxxxx?expansion=name%2Cowner%2Cdescription%2CparentDataGroupId%2CtimezoneDesignator%2CexternalData' \
+-H 'x-api-key: {API_KEY}' \
+-H 'x-gw-ims-org-id: {GLOBAL_COMPANY_ID}' \
+-H 'Authorization: Bearer {AUTHORIZATION_TOKEN}'
+```
+
+#### Response
+
+```JSON
+{
+    "name": "Example Data View 1",
+    "description": "Example Data View",
+    "owner": {
+        "imsUserId": "{IMS_USER_ID}",
+        "ownerId": "{OWNER_ID}",
+        "name": "Example name 1",
+        "type": "imsUser"
+    },
+    "parentDataGroupId": "dg_c590c1e0-0cb0-11ea-a9a5-19370exxxxxx",
+    "timezoneDesignator": "US/Mountain",
+    "externalData": {
+        "externalParentId": "c590c1e0-0cb0-11ea-a9a5-19370exxxxxx"
+    },
+    "id": "dv_150a049f5d02785bacxxxxxx"
+}
+```
+
+### Request example details
+
+The example above requests the `expansion` parameter values for `name`, `owner`, `description`, `parentDataGroupId`, `timezoneDesignator`, and `externalData` for data view `dv_150a049f5d02785bacxxxxxx`.
+
+### Response example details
+
+The example response above shows the following for data view `dv_150a049f5d02785bacxxxxxx`:
+
+* `Example Data View 1` as the `name`.
+* `Example Data View` as the `description`.
+* `Example name 1` as the `name` for the `owner`.
+* `dg_c590c1e0-0cb0-11ea-a9a5-19370exxxxxx` as the `parentDataGroupId`.
+* `US/Mountain` as the `timezoneDesignator`.
+* `c590c1e0-0cb0-11ea-a9a5-19370exxxxxx` as the`externalData`.
+
+### Request Parameters
+
+| Name | Required | Type | Description |
+| --- | --- | --- | --- |
+| `dataViewId` | required | string | The Data View ID to lookup |
+| `expansion` |  | array of strings | Comma-delimited list of additional fields to include on response. Includes the enums `name`, `description`, `owner`, `isDeleted`, `parentDataGroupId`, `segmentList`, `currentTimezoneOffset`, `timezoneDesignator`, `modified`, `createdDate`, `organization`, `curationEnabled`, `recentRecordedAccess`, `sessionDefinition`, `externalData`, and `containerNames`. |
+
+### Response Parameters
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `name` | string | The name of the data view |
+| `description` | string | The description of a data view |
+| `owner` | container | The owner of a data view. Contains the `imsUserId`, and `name` parameters. |
+| `imsUserId` | string | The IMS user ID of the owner of a data view |
+| `name` | string | The name of the owner of a data view |
+| `isDeleted` | boolean | If the data view is deleted |
+| `parentDataGroupId` | string | The data group ID associated with the data view |
+| `segmentList` | array of strings |  |
+| `currentTimezoneOffset` | integer |  |
+| `timezoneDesignator` | string | The timezone used by the data view |
+| `modifiedDate` | string | The date the data view was last modified |
+| `createdDate` | string | The date the data view was created |
+| `organization` | string | The organization the data view belongs to |
+| `modifiedBy` | string | Who last modified the data view |
+| `curationEnabled` |  boolean |  |
+| `recentRecordedAccess` | string |  |
+| `sessionDefinition` | container | Contains the `numPeriods`, `granularity`, `func`, and `events` parameters |
+| `numPeriods` | integer |  |
+| `granularity` | string | A defined period of time. Includes the following enums: `MINUTE`, `HOUR`, `DAY`, and `WEEK`. |
+| `func` | string | Includes the enums: `INACTIVITY`, and `BEFORE_EVENTS`. |
+| `events` | array of strings |  |
+| `externalData` | container | Contains the `externalId`, and `externalParentId` parameters |
+| `externalId` | string |  |
+| `externalParentId` | string | The ID of the parent data group used by the data view |
+| `containerNames` | container | Contains the `event`, `session`, and `people` parameters |
+| `event` | string | The name of the event container |
+| `session` | string | The name of the session container |
+| `people` | string | The name of the people container |
+| `id` | string | The ID of the data view |
+
+## POST Validate a data view
+
+Use this endpoint to validate a data view structure before using other POST or PUT methods. You can use this as a check to make sure your current data structure is valid before it is final.   
+
+`POST https://cja.adobe.io/data/dataviews/validate`
+
+### Request and Response Examples
+
+Click the **Request** tab in the following example to see a cURL request for this endpoint. Click the **Response** tab to see a successful JSON response for the request.
+
+<CodeBlock slots="heading, code" repeat="2" languages="CURL,JSON"/>
+
+#### Request
+
+```sh
+curl -L 'https://cja.adobe.io/data/dataviews/validate' \
+-H 'x-api-key: {API_KEY}' \
+-H 'x-gw-ims-org-id: {GLOBAL_COMPANY_ID}' \
+-H 'Authorization: Bearer {AUTHORIZATION_TOKEN}'\
+-H 'Content-Type: application/json' \
+--data-raw '{
+    "name": "testView",
+    "description": "A Test Data View",
+    "owner": {
+        "imsUserId": "{IMS_USER_ID}",
+        "ownerId": "{OWNER_ID}",
+        "name": "null null",
+        "type": "imsUser"
+    },
+    "isDeleted": false,
+    "parentDataGroupId": "{PARENT_DATA_GROUP_ID}",
+    "organization": "{IMS_ORG_ID}",
+    "modifiedBy": "{IMS_USER_ID}",
+    "sessionDefinition": [
+        {
+            "numPeriods": 15,
+            "granularity": "minute",
+            "func": "inactivity",
+            "events": [
+                "string"
+            ]
+        }
+    ],
+    "externalData": {
+        "externalParentId": "{EXTERNAL_PARENT_ID}"
+    }
+}'
+```
+
+#### Response
+
+```JSON
+{
+    "valid": false,
+    "message": "The following fields are required: [timezoneDesignator] "
+}
+```
+
+### Request example details
+
+The example above requests a validation for the data structure shown in the body of the request. No data view ID is supplied.
+
+### Response example details
+
+The example above shows a `false` response for an invalid data structure. The message includes the missing field `timeZoneDesignator` required for a valid structure. If a structure is valid, it returns the following: 
+```
+{
+    "valid": true,
+}
+```
+### Request Parameters
+
+The request parameters are dependent upon the structure supplied for validation. The following table shows the parameters shown in the example data structure.
+
+| Name | Required | Type | Description |
+| --- | --- | --- | --- |
+| `name` |  | string | The name of the data view |
+| `description` |  | string | The description of a data view |
+| `owner` |  | container | The owner of a data view. Contains the `imsUserId`, and `name` parameters. |
+| `imsUserId` |  | string | The IMS user ID of the owner of a data view |
+| `name` |  | string | The name of the owner of a data view |
+| `isDeleted` |  | boolean | If the data view is deleted |
+| `parentDataGroupId` |  | string | The data group ID associated with the data view |
+| `segmentList` | | array of strings |  |
+| `currentTimezoneOffset` | | integer |  |
+| `timezoneDesignator` | | string | The timezone used by the data view |
+| `modifiedDate` | | string | The date the data view was last modified |
+| `createdDate` | | string | The date the data view was created |
+| `organization` | | string | The organization the data view belongs to |
+| `modifiedBy` | | string | Who last modified the data view |
+| `curationEnabled` |  | boolean |  |
+| `recentRecordedAccess` |  | string |  |
+| `sessionDefinition` |  | container | Contains the `numPeriods`, `granularity`, `func`, and `events` parameters |
+| `numPeriods` |  | integer |  |
+| `granularity` |  | string | A defined period of time. Includes the following enums: `MINUTE`, `HOUR`, `DAY`, and `WEEK`. |
+| `func` |  | string | Includes the enums: `INACTIVITY`, and `BEFORE_EVENTS`. |
+| `events` |  | array of strings |  |
+| `externalData` |  | container | Contains the `externalId`, and `externalParentId` parameters |
+| `externalId` |  | string |  |
+| `externalParentId` |  | string | The ID of the parent data group used by the data view |
+| `containerNames` |  | container | Contains the `event`, `session`, and `people` parameters |
+| `event` | | string | The name of the event container |
+| `session` | | string | The name of the session container |
+| `people` | | string | The name of the people container |
+| `id` | | string | The ID of the data view |
+
+
+### Response Parameters
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `valid` | boolean | If the data view is valid |
+| `message` | string | Any issues with the provided data view |
+| `validator_version` | string | The validator version |
+
 ## POST create a data view
 
 Use this endpoint to create a data view using a JSON payload.
@@ -334,11 +547,11 @@ The response example above shows the following:
 | `people` | string | The name of the people container |
 | `id` | string | The ID of the data view |
 
-## GET a single data view
+## PUT Copy a data view
 
-Use this endpoint to retrieve data associated with a specific data view.
+Use this endpoint to copy a data view.
 
-`GET https://cja.adobe.io/data/dataviews/{DATA_VIEW_ID}`
+`PUT https://cja.adobe.io/data/dataviews/copy/{DATA_VIEW_ID}`
 
 ### Request and Response Examples
 
@@ -349,53 +562,51 @@ Click the **Request** tab in the following example to see a cURL request for thi
 #### Request
 
 ```sh
-curl -L 'https://cja.adobe.io/data/dataviews/dv_150a049f5d02785bacxxxxxx?expansion=name%2Cowner%2Cdescription%2CparentDataGroupId%2CtimezoneDesignator%2CexternalData' \
+curl -X PUT 'https://cja.adobe.io/data/dataviews/copy/dv_650a049f5d02785bacxxxxxx?expansion=name%2Cdescription%2Cowner%2CcreatedDate' \
 -H 'x-api-key: {API_KEY}' \
 -H 'x-gw-ims-org-id: {GLOBAL_COMPANY_ID}' \
--H 'Authorization: Bearer {AUTHORIZATION_TOKEN}'
+-H 'Authorization: Bearer {AUTHORIZATION_TOKEN}'\
 ```
 
 #### Response
 
 ```JSON
 {
-    "name": "Example Data View 1",
-    "description": "Example Data View",
+    "name": "testView (Copy)",
+    "description": "A test data view",
     "owner": {
-        "imsUserId": "{IMS_USER_ID}",
-        "ownerId": "{OWNER_ID}",
-        "name": "Example name 1",
+        "imsUserId": "Copy_requester@example.com",
+        "ownerId": "Copy_requester@example.com",
+        "name": "null null",
         "type": "imsUser"
     },
-    "parentDataGroupId": "dg_c590c1e0-0cb0-11ea-a9a5-19370exxxxxx",
-    "timezoneDesignator": "US/Mountain",
-    "externalData": {
-        "externalParentId": "c590c1e0-0cb0-11ea-a9a5-19370exxxxxx"
-    },
-    "id": "dv_150a049f5d02785bacxxxxxx"
+    "createdDate": "20XX-09-19T20:20:11Z",
+    "componentType": "dataView",
+    "id": "dv_111b123g4e63481redxxxxxx"
 }
 ```
 
 ### Request example details
 
-The example above requests the `expansion` parameter values for `name`, `owner`, `description`, `parentDataGroupId`, `timezoneDesignator`, and `externalData` for data view `dv_150a049f5d02785bacxxxxxx`.
+The example above shows the following information:
+
+* A request to copy the data view `dv_650a049f5d02785bacxxxxxx`.
+* A request to return the `name`, `description`, `owner`, and `createdDate` of the successful copy.
 
 ### Response example details
 
-The example response above shows the following for data view `dv_150a049f5d02785bacxxxxxx`:
+The example response above shows the following information:
 
-* `Example Data View 1` as the `name`.
-* `Example Data View` as the `description`.
-* `Example name 1` as the `name` for the `owner`.
-* `dg_c590c1e0-0cb0-11ea-a9a5-19370exxxxxx` as the `parentDataGroupId`.
-* `US/Mountain` as the `timezoneDesignator`.
-* `c590c1e0-0cb0-11ea-a9a5-19370exxxxxx` as the`externalData`.
+* The name of the new copy is the same as the original with `(Copy)` added to it.
+* The `description` is the same as the original.
+* The `imsUserId` and `ownerId` reflect the information of the user requesting the copy. The original `owner` information does not persist to the copy.
+* The new data view ID `dv_111b123g4e63481redxxxxxx` is provided for the copy. 
 
 ### Request Parameters
 
 | Name | Required | Type | Description |
 | --- | --- | --- | --- |
-| `dataViewId` | required | string | The Data View ID to lookup |
+| `dataViewId` | required | string | The Data View ID to copy |
 | `expansion` |  | array of strings | Comma-delimited list of additional fields to include on response. Includes the enums `name`, `description`, `owner`, `isDeleted`, `parentDataGroupId`, `segmentList`, `currentTimezoneOffset`, `timezoneDesignator`, `modified`, `createdDate`, `organization`, `curationEnabled`, `recentRecordedAccess`, `sessionDefinition`, `externalData`, and `containerNames`. |
 
 ### Response Parameters
@@ -619,214 +830,3 @@ The example response above shows the DELETE was a `success`.
 | --- | --- | --- |
 | `result` | sting | The result of the delete request |
 | `message` | string | A message associated with the result |
-
-## PUT Copy a data view
-
-Use this endpoint to copy a data view.
-
-`PUT https://cja.adobe.io/data/dataviews/copy/{DATA_VIEW_ID}`
-
-### Request and Response Examples
-
-Click the **Request** tab in the following example to see a cURL request for this endpoint. Click the **Response** tab to see a successful JSON response for the request.
-
-<CodeBlock slots="heading, code" repeat="2" languages="CURL,JSON"/>
-
-#### Request
-
-```sh
-curl -X PUT 'https://cja.adobe.io/data/dataviews/copy/dv_650a049f5d02785bacxxxxxx?expansion=name%2Cdescription%2Cowner%2CcreatedDate' \
--H 'x-api-key: {API_KEY}' \
--H 'x-gw-ims-org-id: {GLOBAL_COMPANY_ID}' \
--H 'Authorization: Bearer {AUTHORIZATION_TOKEN}'\
-```
-
-#### Response
-
-```JSON
-{
-    "name": "testView (Copy)",
-    "description": "A test data view",
-    "owner": {
-        "imsUserId": "Copy_requester@example.com",
-        "ownerId": "Copy_requester@example.com",
-        "name": "null null",
-        "type": "imsUser"
-    },
-    "createdDate": "20XX-09-19T20:20:11Z",
-    "componentType": "dataView",
-    "id": "dv_111b123g4e63481redxxxxxx"
-}
-```
-
-### Request example details
-
-The example above shows the following information:
-
-* A request to copy the data view `dv_650a049f5d02785bacxxxxxx`.
-* A request to return the `name`, `description`, `owner`, and `createdDate` of the successful copy.
-
-### Response example details
-
-The example response above shows the following information:
-
-* The name of the new copy is the same as the original with `(Copy)` added to it.
-* The `description` is the same as the original.
-* The `imsUserId` and `ownerId` reflect the information of the user requesting the copy. The original `owner` information does not persist to the copy.
-* The new data view ID `dv_111b123g4e63481redxxxxxx` is provided for the copy. 
-
-### Request Parameters
-
-| Name | Required | Type | Description |
-| --- | --- | --- | --- |
-| `dataViewId` | required | string | The Data View ID to copy |
-| `expansion` |  | array of strings | Comma-delimited list of additional fields to include on response. Includes the enums `name`, `description`, `owner`, `isDeleted`, `parentDataGroupId`, `segmentList`, `currentTimezoneOffset`, `timezoneDesignator`, `modified`, `createdDate`, `organization`, `curationEnabled`, `recentRecordedAccess`, `sessionDefinition`, `externalData`, and `containerNames`. |
-
-### Response Parameters
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `name` | string | The name of the data view |
-| `description` | string | The description of a data view |
-| `owner` | container | The owner of a data view. Contains the `imsUserId`, and `name` parameters. |
-| `imsUserId` | string | The IMS user ID of the owner of a data view |
-| `name` | string | The name of the owner of a data view |
-| `isDeleted` | boolean | If the data view is deleted |
-| `parentDataGroupId` | string | The data group ID associated with the data view |
-| `segmentList` | array of strings |  |
-| `currentTimezoneOffset` | integer |  |
-| `timezoneDesignator` | string | The timezone used by the data view |
-| `modifiedDate` | string | The date the data view was last modified |
-| `createdDate` | string | The date the data view was created |
-| `organization` | string | The organization the data view belongs to |
-| `modifiedBy` | string | Who last modified the data view |
-| `curationEnabled` |  boolean |  |
-| `recentRecordedAccess` | string |  |
-| `sessionDefinition` | container | Contains the `numPeriods`, `granularity`, `func`, and `events` parameters |
-| `numPeriods` | integer |  |
-| `granularity` | string | A defined period of time. Includes the following enums: `MINUTE`, `HOUR`, `DAY`, and `WEEK`. |
-| `func` | string | Includes the enums: `INACTIVITY`, and `BEFORE_EVENTS`. |
-| `events` | array of strings |  |
-| `externalData` | container | Contains the `externalId`, and `externalParentId` parameters |
-| `externalId` | string |  |
-| `externalParentId` | string | The ID of the parent data group used by the data view |
-| `containerNames` | container | Contains the `event`, `session`, and `people` parameters |
-| `event` | string | The name of the event container |
-| `session` | string | The name of the session container |
-| `people` | string | The name of the people container |
-| `id` | string | The ID of the data view |
-
-## POST Validate a data view
-
-Use this endpoint to validate a data view structure before using other POST or PUT methods. You can use this as a check to make sure your current data structure is valid before it is final.   
-
-`POST https://cja.adobe.io/data/dataviews/validate`
-
-### Request and Response Examples
-
-Click the **Request** tab in the following example to see a cURL request for this endpoint. Click the **Response** tab to see a successful JSON response for the request.
-
-<CodeBlock slots="heading, code" repeat="2" languages="CURL,JSON"/>
-
-#### Request
-
-```sh
-curl -L 'https://cja.adobe.io/data/dataviews/validate' \
--H 'x-api-key: {API_KEY}' \
--H 'x-gw-ims-org-id: {GLOBAL_COMPANY_ID}' \
--H 'Authorization: Bearer {AUTHORIZATION_TOKEN}'\
--H 'Content-Type: application/json' \
---data-raw '{
-    "name": "testView",
-    "description": "A Test Data View",
-    "owner": {
-        "imsUserId": "{IMS_USER_ID}",
-        "ownerId": "{OWNER_ID}",
-        "name": "null null",
-        "type": "imsUser"
-    },
-    "isDeleted": false,
-    "parentDataGroupId": "{PARENT_DATA_GROUP_ID}",
-    "organization": "{IMS_ORG_ID}",
-    "modifiedBy": "{IMS_USER_ID}",
-    "sessionDefinition": [
-        {
-            "numPeriods": 15,
-            "granularity": "minute",
-            "func": "inactivity",
-            "events": [
-                "string"
-            ]
-        }
-    ],
-    "externalData": {
-        "externalParentId": "{EXTERNAL_PARENT_ID}"
-    }
-}'
-```
-
-#### Response
-
-```JSON
-{
-    "valid": false,
-    "message": "The following fields are required: [timezoneDesignator] "
-}
-```
-
-### Request example details
-
-The example above requests a validation for the data structure shown in the body of the request. No data view ID is supplied.
-
-### Response example details
-
-The example above shows a `false` response for an invalid data structure. The message includes the missing field `timeZoneDesignator` required for a valid structure. If a structure is valid, it returns the following: 
-```
-{
-    "valid": true,
-}
-```
-### Request Parameters
-
-The request parameters are dependent upon the structure supplied for validation. The following table shows the parameters shown in the example data structure.
-
-| Name | Required | Type | Description |
-| --- | --- | --- | --- |
-| `name` |  | string | The name of the data view |
-| `description` |  | string | The description of a data view |
-| `owner` |  | container | The owner of a data view. Contains the `imsUserId`, and `name` parameters. |
-| `imsUserId` |  | string | The IMS user ID of the owner of a data view |
-| `name` |  | string | The name of the owner of a data view |
-| `isDeleted` |  | boolean | If the data view is deleted |
-| `parentDataGroupId` |  | string | The data group ID associated with the data view |
-| `segmentList` | | array of strings |  |
-| `currentTimezoneOffset` | | integer |  |
-| `timezoneDesignator` | | string | The timezone used by the data view |
-| `modifiedDate` | | string | The date the data view was last modified |
-| `createdDate` | | string | The date the data view was created |
-| `organization` | | string | The organization the data view belongs to |
-| `modifiedBy` | | string | Who last modified the data view |
-| `curationEnabled` |  | boolean |  |
-| `recentRecordedAccess` |  | string |  |
-| `sessionDefinition` |  | container | Contains the `numPeriods`, `granularity`, `func`, and `events` parameters |
-| `numPeriods` |  | integer |  |
-| `granularity` |  | string | A defined period of time. Includes the following enums: `MINUTE`, `HOUR`, `DAY`, and `WEEK`. |
-| `func` |  | string | Includes the enums: `INACTIVITY`, and `BEFORE_EVENTS`. |
-| `events` |  | array of strings |  |
-| `externalData` |  | container | Contains the `externalId`, and `externalParentId` parameters |
-| `externalId` |  | string |  |
-| `externalParentId` |  | string | The ID of the parent data group used by the data view |
-| `containerNames` |  | container | Contains the `event`, `session`, and `people` parameters |
-| `event` | | string | The name of the event container |
-| `session` | | string | The name of the session container |
-| `people` | | string | The name of the people container |
-| `id` | | string | The ID of the data view |
-
-
-### Response Parameters
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `valid` | boolean | If the data view is valid |
-| `message` | string | Any issues with the provided data view |
-| `validator_version` | string | The validator version |
