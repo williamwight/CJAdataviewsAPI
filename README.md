@@ -449,7 +449,7 @@ Click the **Request** tab in the following example to see a cURL request for thi
 #### Request
 
 ```sh
-curl -L -X PUT 'https://cja.adobe.io/data/dataviews/dv_650a049f5d02785bacxxxxxx?expansion=name%2Cmodified' \
+curl PUT 'https://cja.adobe.io/data/dataviews/dv_650a049f5d02785bacxxxxxx?expansion=name%2Cmodified' \
 -H 'x-api-key: {API_KEY}' \
 -H 'x-gw-ims-org-id: {GLOBAL_COMPANY_ID}' \
 -H 'Authorization: Bearer {AUTHORIZATION_TOKEN}'\
@@ -483,7 +483,7 @@ curl -L -X PUT 'https://cja.adobe.io/data/dataviews/dv_650a049f5d02785bacxxxxxx?
             ]
         }
     ],
-    "id": "dv_650a049f5d02785bac9225a7",
+    "id": "dv_650a049f5d02785bacxxxxxx",
     "modifiedDate": "2023-09-19T20:32:20Z",
     "modifiedBy": "{IMS_USER_ID}"
 }
@@ -575,9 +575,9 @@ The example response above shows the following:
 | `people` | string | The name of the people container |
 | `id` | string | The ID of the data view |
 
-## DELETE /data/dataviews/{dataViewId} {Deletion of a Data View by dataViewId}
+## DELETE a data view
 
-{DESCRIPTION}
+Use this endpoint to remove a data view.
 
 `DELETE https://cja.adobe.io/data/dataviews/{DATA_VIEW_ID}`
 
@@ -590,7 +590,7 @@ Click the **Request** tab in the following example to see a cURL request for thi
 #### Request
 
 ```sh
-curl -L -X DELETE 'https://cja.adobe.io/data/dataviews/{DATA_VIEW_ID}' \
+curl -X DELETE 'https://cja.adobe.io/data/dataviews/dv_650a049f5d02785bacxxxxxx' \
 -H 'x-api-key: {API_KEY}' \
 -H 'x-gw-ims-org-id: {GLOBAL_COMPANY_ID}' \
 -H 'Authorization: Bearer {AUTHORIZATION_TOKEN}'\
@@ -607,17 +607,17 @@ curl -L -X DELETE 'https://cja.adobe.io/data/dataviews/{DATA_VIEW_ID}' \
 
 ### Request example details
 
-The example above requests to `DELETE` the `{DATA_VIEW_ID}`.
+The example request above uses the DELETE method to remove the data view `dv_650a049f5d02785bacxxxxxx`.
 
 ### Response example details
 
-The example above returns that the `result` of the delete was `success`.
+The example response above shows the DELETE was a `success`.
 
 ### Request Parameters
 
 | Name | Required | Type | Description |
 | --- | --- | --- | --- |
-| `dataViewId` | required | string | The Data View ID to delete |
+| `dataViewId` | required | string | The data view ID to delete |
 
 ### Response Parameters
 
