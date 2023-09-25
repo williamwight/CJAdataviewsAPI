@@ -594,7 +594,6 @@ curl -X DELETE 'https://cja.adobe.io/data/dataviews/dv_650a049f5d02785bacxxxxxx'
 -H 'x-api-key: {API_KEY}' \
 -H 'x-gw-ims-org-id: {GLOBAL_COMPANY_ID}' \
 -H 'Authorization: Bearer {AUTHORIZATION_TOKEN}'\
--d ''
 ```
 
 #### Response
@@ -626,9 +625,9 @@ The example response above shows the DELETE was a `success`.
 | `result` | sting | The result of the delete request |
 | `message` | string | A message associated with the result |
 
-## PUT /data/dataviews/copy/{dataViewId} {Copy a data view}
+## PUT Copy a data view
 
-{DESCRIPTION}
+Use this endpoint to copy a data view.
 
 `PUT https://cja.adobe.io/data/dataviews/copy/{DATA_VIEW_ID}`
 
@@ -641,11 +640,10 @@ Click the **Request** tab in the following example to see a cURL request for thi
 #### Request
 
 ```sh
-curl -L -X PUT 'https://cja.adobe.io/data/dataviews/copy/{DATA_VIEW_ID}?expansion=name%2Cdescription%2Cowner%2CcreatedDate' \
+curl -X PUT 'https://cja.adobe.io/data/dataviews/copy/dv_650a049f5d02785bacxxxxxx?expansion=name%2Cdescription%2Cowner%2CcreatedDate' \
 -H 'x-api-key: {API_KEY}' \
 -H 'x-gw-ims-org-id: {GLOBAL_COMPANY_ID}' \
 -H 'Authorization: Bearer {AUTHORIZATION_TOKEN}'\
--d ''
 ```
 
 #### Response
@@ -655,24 +653,32 @@ curl -L -X PUT 'https://cja.adobe.io/data/dataviews/copy/{DATA_VIEW_ID}?expansio
     "name": "testView (Copy)",
     "description": "A test data view",
     "owner": {
-        "imsUserId": "{IMS_USER_ID}",
-        "ownerId": "{OWNER_ID}",
+        "imsUserId": "Copy_requester@example.com",
+        "ownerId": "Copy_requester@example.com",
         "name": "null null",
         "type": "imsUser"
     },
-    "createdDate": "2023-09-19T20:20:11Z",
+    "createdDate": "20XX-09-19T20:20:11Z",
     "componentType": "dataView",
-    "id": "{DATA_VIEW_ID}"
+    "id": "dv_111b123g4e63481redxxxxxx"
 }
 ```
 
 ### Request example details
 
-The example above request to copy the `{DATA_VIEW_ID}`.
+The example above shows the following information:
+
+* A request to copy the data view `dv_650a049f5d02785bacxxxxxx`.
+* A request to return the `name`, `description`, `owner`, and `createdDate` of the successful copy.
 
 ### Response example details
 
-The example above returns the information of the newly copied data view.
+The example response above shows the following information:
+
+* The name of the new copy is the same as the original with `(Copy)` added to it.
+* The `description` is the same as the original.
+* The `imsUserId` and `ownerId` reflect the information of the user requesting the copy. The original `owner` information does not persist to the copy.
+* The new data view ID `dv_111b123g4e63481redxxxxxx` is provided for the copy. 
 
 ### Request Parameters
 
