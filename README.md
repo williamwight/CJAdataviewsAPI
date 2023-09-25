@@ -723,7 +723,7 @@ The example response above shows the following information:
 
 ## POST Validate a data view
 
-Use this endpoint to validate a dataview structure before using other POST or PUT methods. You can use this as a check to make sure your current data structure is valid before it is final.   
+Use this endpoint to validate a data view structure before using other POST or PUT methods. You can use this as a check to make sure your current data structure is valid before it is final.   
 
 `POST https://cja.adobe.io/data/dataviews/validate`
 
@@ -781,15 +781,19 @@ curl -L 'https://cja.adobe.io/data/dataviews/validate' \
 
 ### Request example details
 
-The example request above requests to validate the data view information given.
+The example above requests a validation for the data structure shown in the body of the request. No data view ID is supplied.
 
 ### Response example details
 
-The example response above states the state of the data view is `valid`.
-
+The example above shows a `false` response for an invalid data structure. The message includes the missing field `timeZoneDesignator` required for a valid structure. If a structure is valid, it returns the following: 
+```
+{
+    "valid": true,
+}
+```
 ### Request Parameters
 
-#### Request Body
+The request parameters are dependent upon the structure supplied for validation. The following table shows the parameters shown in the example data structure.
 
 | Name | Required | Type | Description |
 | --- | --- | --- | --- |
