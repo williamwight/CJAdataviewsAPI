@@ -721,9 +721,9 @@ The example response above shows the following information:
 | `people` | string | The name of the people container |
 | `id` | string | The ID of the data view |
 
-## POST /data/dataviews/validate {Validates a data view}
+## POST Validate a data view
 
-{DESCRIPTION}
+Use this endpoint to validate a dataview structure before using other POST or PUT methods. You can use this as a check to make sure your current data structure is valid before it is final.   
 
 `POST https://cja.adobe.io/data/dataviews/validate`
 
@@ -781,7 +781,7 @@ curl -L 'https://cja.adobe.io/data/dataviews/validate' \
 
 ### Request example details
 
-The example above requests to validate the data view information given.
+The example request above requests to validate the data view information given.
 
 ### Response example details
 
