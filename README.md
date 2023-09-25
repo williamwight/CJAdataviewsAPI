@@ -506,11 +506,6 @@ The example response above shows the following:
 | --- | --- | --- | --- |
 | `dataViewId` | required | string | The Data View ID to update |
 | `expansion` |  | string | Comma-delimited list of additional fields to include on response. Includes the enums `name`, `description`, `owner`, `isDeleted`, `parentDataGroupId`, `segmentList`, `currentTimezoneOffset`, `timezoneDesignator`, `modified`, `createdDate`, `organization`, `curationEnabled`, `recentRecordedAccess`, `sessionDefinition`, `externalData`, and `containerNames`. |
-
-#### Request Body
-
-| Name | Required | Type | Description |
-| --- | --- | --- | --- |
 | `name` |  | string | The name of the data view |
 | `description` |  | string | The description of a data view |
 | `owner` |  | container | The owner of a data view. Contains the `imsUserId`, and `name` parameters. |
