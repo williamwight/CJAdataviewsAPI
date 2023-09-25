@@ -752,7 +752,6 @@ curl -L 'https://cja.adobe.io/data/dataviews/validate' \
     },
     "isDeleted": false,
     "parentDataGroupId": "{PARENT_DATA_GROUP_ID}",
-    "timezoneDesignator": "US/Mountain",
     "organization": "{IMS_ORG_ID}",
     "modifiedBy": "{IMS_USER_ID}",
     "sessionDefinition": [
@@ -775,7 +774,8 @@ curl -L 'https://cja.adobe.io/data/dataviews/validate' \
 
 ```JSON
 {
-    "valid": true
+    "valid": false,
+    "message": "The following fields are required: [timezoneDesignator] "
 }
 ```
 
